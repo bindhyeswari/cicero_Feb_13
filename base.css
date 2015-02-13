@@ -40,7 +40,20 @@ button:hover, input[type="submit"]:hover {
     display: none;
 }
 
+.custom-filepicker .file-container {
+    margin: 0.5em;
+    padding: 0.2em;
+}
+
 .custom-filepicker .file-container > div {
     display: inline-block;
     margin: 0.25em 0.5em;
+    font-size: 0.85em;
+    color: #777;
+}
+
+.custom-filepicker .file-container .file-name {
+    color: #333;
+    font-size: 1em;
+
 }
