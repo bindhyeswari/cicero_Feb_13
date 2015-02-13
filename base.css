@@ -39,3 +39,8 @@ button:hover, input[type="submit"]:hover {
 .custom-filepicker input[type="file"] {
     display: none;
 }
+
+.custom-filepicker .file-container > div {
+    display: inline-block;
+    margin: 0.25em 0.5em;
+}

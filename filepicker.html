@@ -13,18 +13,7 @@
                 new FilePicker(filepickers[i]);
             }
 
-            document.querySelector('input').addEventListener('change', function (event) {
-                var files = Array.prototype.slice.call(this.files);
-                console.log(files);
-                var div_filelist = document.querySelector('#filelist');
-                files.forEach(function (file) {
-                    var file_container = createElement('div', div_filelist, '', 'file-container panel');
-                    createElement('div', file_container, file.name, 'file-name');
-                    createElement('div', file_container, file.size, 'file-size');
-                    createElement('div', file_container, file.lastModifiedDate, 'file-date');
-                    createElement('div', file_container, file.type, 'file-type');
-                });
-            });
+
         });
 
         function createElement(type, parent, innerHTML, className) {
@@ -36,11 +25,40 @@
         }
 
         function FilePicker(div_element) {
+            this.btn_browse = createElement('button', div_element, 'Select File(s)', 'file-select');
             this.input_element = createElement('input', div_element, '');
             this.input_element.setAttribute('multiple', 'multiple');
             this.input_element.setAttribute('type', 'file');
             this.div_filelist_element = createElement('div', div_element, '', 'filelist');
-            this.btn_browse = createElement('button', div_element, 'Select File(s)', 'file-select');
+
+            var input = this.input_element;
+            var div_files = this.div_filelist_element;
+            var self = this;
+            self.files = [];
+
+            this.btn_browse.addEventListener('click', function () {
+                input.click();
+            });
+
+            input.addEventListener('change', function () {
+                var files = Array.prototype.slice.call(this.files);
+                console.log(files);
+                self.files = self.files.concat(files);
+                console.log(self.files);
+                self.showfiles();
+            });
+        }
+
+        FilePicker.prototype.showfiles = function () {
+            var div_files = this.div_filelist_element;
+            div_files.innerHTML = '';
+            this.files.forEach(function (file) {
+                var file_container = createElement('div', div_files, '', 'file-container panel');
+                createElement('div', file_container, file.name, 'file-name');
+                createElement('div', file_container, file.size, 'file-size');
+                createElement('div', file_container, file.lastModifiedDate, 'file-date');
+                createElement('div', file_container, file.type, 'file-type');
+            });
         }
 
     </script>
