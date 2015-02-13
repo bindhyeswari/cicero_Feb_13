@@ -57,3 +57,12 @@ button:hover, input[type="submit"]:hover {
     font-size: 1em;
 
 }
+
+.custom-filepicker .remove {
+    float: right;
+}
+
+.custom-filepicker .remove::before {
+    content: '×';
+    cursor: pointer;
+}

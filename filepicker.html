@@ -51,19 +51,27 @@
 
         FilePicker.prototype.showfiles = function () {
             var div_files = this.div_filelist_element;
+            var self = this;
             div_files.innerHTML = '';
-            this.files.forEach(function (file) {
+            this.files.forEach(function (file, fileindex) {
                 var file_container = createElement('div', div_files, '', 'file-container panel');
+                file_container.dataset.fileid = fileindex;
                 createElement('div', file_container, file.name, 'file-name');
                 createElement('div', file_container, file.size, 'file-size');
                 createElement('div', file_container, file.lastModifiedDate, 'file-date');
                 createElement('div', file_container, file.type, 'file-type');
+                createElement('div', file_container, '', 'remove').addEventListener('click', function () {
+                    var index = +this.parentNode.dataset.fileid;
+                    self.files.splice(index, 1);
+                    self.showfiles();
+                });
             });
         }
 
     </script>
 </head>
 <body>
+
     <div class="custom-filepicker"></div>
 </body>
 </html>
